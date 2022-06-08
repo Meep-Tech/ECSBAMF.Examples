@@ -8,27 +8,27 @@ namespace Meep.Tech.Data.Examples.AutoBuilder {
   /// </summary>
   public class Animal : Model<Animal, Animal.Type>, IModel.IUseDefaultUniverse {
 
-    [Configuration.AutoBuild(IsRequiredAsAParameter = true, NotNull = true)]
+    [AutoBuild(IsRequiredAsAParameter = true, NotNull = true)]
     public virtual string Name {
       get; protected set;
     }
 
-    [Configuration.AutoBuild(ParameterName = "AgeInYears")]
+    [AutoBuild(ParameterName = "AgeInYears")]
     public int YearsOld {
       get; private set;
     }
 
-    [Configuration.AutoBuild(ValueValidatorName = nameof(_numberOfLegsValidator))]
+    [AutoBuild(ValueValidatorName = nameof(_numberOfLegsValidator))]
     public int NumberOfLegs {
       get; private set;
     }
 
-    [Configuration.AutoBuild(DefaultArchetypePropertyName = nameof(Type.CanClimb))]
+    [AutoBuild(DefaultArchetypePropertyName = nameof(Type.CanClimb))]
     public bool IsAClimber {
       get; private set;
     }
 
-    [Configuration.AutoBuild(DefaultValueGetterDelegateName = nameof(_speedDefaultValueGetter), Order = 100)]
+    [AutoBuild(DefaultValueGetterDelegateName = nameof(_speedDefaultValueGetter), Order = 100)]
     public int Speed {
       get; private set;
     }
@@ -39,7 +39,7 @@ namespace Meep.Tech.Data.Examples.AutoBuilder {
 
     #region Validation
 
-     Configuration.AutoBuildAttribute.ValueValidator _numberOfLegsValidator
+     AutoBuildAttribute.ValueValidator _numberOfLegsValidator
       = (object v, IBuilder b, IModel m, out string t, out System.Exception x)
         => {
           if((int)v >= 0) {
@@ -60,7 +60,7 @@ namespace Meep.Tech.Data.Examples.AutoBuilder {
 
     #region Defaults
 
-    Configuration.AutoBuildAttribute.DefaultValueGetter _speedDefaultValueGetter
+    AutoBuildAttribute.DefaultValueGetter _speedDefaultValueGetter
       = (IBuilder b, IModel m) => (m as Animal).NumberOfLegs * 4;
 
     #endregion
@@ -117,7 +117,7 @@ namespace Meep.Tech.Data.Examples.AutoBuilder {
 
     public class Dog : Animal {
 
-      [Configuration.AutoBuild(NotNull = true)]
+      [AutoBuild(NotNull = true)]
       public override string Name
         => base.Name ??= "Friend";
 
@@ -139,7 +139,7 @@ namespace Meep.Tech.Data.Examples.AutoBuilder {
 
     public class Cat : Animal {
 
-      [Configuration.AutoBuild(NotNull = true)]
+      [AutoBuild(NotNull = true)]
       public override string Name {
         get;
         protected set;
