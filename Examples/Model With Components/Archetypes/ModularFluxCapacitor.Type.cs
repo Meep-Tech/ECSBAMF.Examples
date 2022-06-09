@@ -8,7 +8,7 @@ namespace Meep.Tech.Data.Examples.ModelWithComponents {
     /// </summary>
     public new class Type : FluxCapacitor.Type {
 
-      public override Func<IBuilder<Device>, Device> ModelConstructor
+      protected override Func<IBuilder<Device>, Device> ModelConstructor
         => builder => new ModularFluxCapacitor();
 
       protected Type()

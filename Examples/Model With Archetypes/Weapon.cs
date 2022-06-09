@@ -46,7 +46,7 @@ namespace Meep.Tech.Data.Examples.ModelWithArchetypes {
         DefaultDamagePerHit = defaultDamagePerHit;
       }
 
-      public override Func<IBuilder<Item>, Item> ModelConstructor
+      protected override Func<IBuilder<Item>, Item> ModelConstructor
         => builder => new Weapon();
 
       protected override Item ConfigureModel(IBuilder<Item> builder, Item model) {

@@ -21,7 +21,7 @@ namespace Meep.Tech.Data.Examples.ModelWithComponents {
           Components<Capacitor>.BuilderFactory.Make()
         );
 
-      public override Func<IBuilder<Device>, Device> ModelConstructor
+      protected override Func<IBuilder<Device>, Device> ModelConstructor
         => builder => new FluxCapacitor();
 
       protected override Device ConfigureModel(IBuilder<Device> builder, Device model) {

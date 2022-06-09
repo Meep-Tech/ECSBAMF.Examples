@@ -6,7 +6,7 @@ namespace Meep.Tech.Data.Examples.ModelWithComponents {
 
     public new class Type : Device.Type {
 
-      public override Func<IBuilder<Device>, Device> ModelConstructor
+      protected override Func<IBuilder<Device>, Device> ModelConstructor
         => builder => new DangerousModularDevice();
 
       protected Type()
