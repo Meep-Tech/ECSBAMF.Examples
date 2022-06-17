@@ -95,4 +95,31 @@ namespace Meep.Tech.Data.Examples.Examples.AutoTesting {
           : base(new(nameof(Gumdrops))) {}
 		}
 	}
+
+  public class Jellybean : Candy {
+    [AutoBuild(IsRequiredAsAParameter = true)]
+    [TestValue(true)]
+    public bool IsShiny {
+      get;
+      private set;
+    }
+
+    internal Jellybean() : base() { }
+  }
+
+  public class JellybeanType : Candy.Type {
+
+    protected override Func<IBuilder<Candy>, Candy> ModelConstructor {
+      get {
+        if (base.ModelConstructor is null) {
+          base.ModelConstructor =  _ => new Jellybean();
+        }
+
+        return base.ModelConstructor;
+      }
+    }
+
+    JellybeanType() 
+      : base(new(nameof(Jellybean))) {}
+  }
 }
