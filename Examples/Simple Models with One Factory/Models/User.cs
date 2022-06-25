@@ -6,6 +6,7 @@ namespace Meep.Tech.Data.Examples.SimpleModelsWithOneFactory {
   public class User : Model<User>, IModel.IUseDefaultUniverse {
 
     [AutoBuild, Required, NotNull]
+    [TestValue("Jim")]
     public string Name {
       get;
       private set;
