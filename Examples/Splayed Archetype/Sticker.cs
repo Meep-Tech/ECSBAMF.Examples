@@ -16,8 +16,8 @@ namespace Meep.Tech.Data.Examples.SplayedArchetype {
     [DoNotBuildInInitialLoad]
     public class Type 
       : Archetype<Sticker, Sticker.Type>,
-        Archetype.IBuildOneForEach<FruitType, Type>,
-        Archetype.IBuildOneForEach<TreeType, Type>
+        Archetype.ISplayed<FruitType, Type>,
+        Archetype.ISplayed<TreeType, Type>
     {
 
       /// <summary>
@@ -27,17 +27,17 @@ namespace Meep.Tech.Data.Examples.SplayedArchetype {
       protected Type(Identity id)
         : base(id) { }
 
-      FruitType IBuildOneForEach<FruitType, Type>.AssociatedEnum {
+      FruitType ISplayed<FruitType, Type>.AssociatedEnum {
         get => _enum as FruitType;
         set => _enum = value;
       }
 
-      TreeType IBuildOneForEach<TreeType, Type>.AssociatedEnum { 
+      TreeType ISplayed<TreeType, Type>.AssociatedEnum { 
         get => _enum as TreeType;
         set => _enum = value;
       } Enumeration _enum;
 
-      Type IBuildOneForEach<FruitType, Type>.ConstructArchetypeFor(FruitType enumeration) {
+      Type ISplayed<FruitType, Type>.ConstructArchetypeFor(FruitType enumeration) {
         return new Type(
           new Identity(enumeration.ExternalId.ToString().Split('.').Last(),
           keyOverride: enumeration.ExternalId.ToString())
@@ -46,7 +46,7 @@ namespace Meep.Tech.Data.Examples.SplayedArchetype {
         };
       }
 
-      Type IBuildOneForEach<TreeType, Type>.ConstructArchetypeFor(TreeType enumeration) {
+      Type ISplayed<TreeType, Type>.ConstructArchetypeFor(TreeType enumeration) {
         return new Type(
           new Identity(enumeration.ExternalId.ToString().Split('.').Last(),
           keyOverride: enumeration.ExternalId.ToString())
